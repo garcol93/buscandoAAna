@@ -42,7 +42,7 @@ public class Game
         casaAbuela = new Room("en la casa de la abuela que esta haciendo la tortilla de patata");
         armario = new Room("en el armario un lugar un tanto oscuro");
         narnia = new Room("en el mundo de Narnia algo no va bien");
-        mordor = new Room("en Mordor lugar donde viven los orcos");
+        mordor = new Room("en Mordor lugar donde viven los orcos te han capturado");
         //habitaciones posibles donde esta Ana 
         Room[] numeroRoom = {laberinto, colegio, castillo, casaAbuela, armario, narnia, mordor}; 
 
@@ -51,15 +51,15 @@ public class Game
         numeroRoom[random.nextInt(numeroRoom.length)].setEstaAna(true);
 
         // puertas de salida de las Room(norte, este ,sur, oeste )
-        inicio.setExits(bosque, null, null, null,null,null);
-        bosque.setExits(laberinto, null, inicio, null,mordor,null);
-        laberinto.setExits(castillo, colegio, bosque, casaAbuela,null,null);
-        colegio.setExits(null, null, null, laberinto, null,null);
-        castillo.setExits(null, null, laberinto, null,null,null);
-        casaAbuela.setExits(null,laberinto,armario, null,null,null);
-        armario.setExits(casaAbuela, null, null, narnia,null,null);
-        narnia.setExits(null, casaAbuela, null, null,null,null);
-        mordor.setExits(null, null, null,null,null,bosque);
+        inicio.setExits(bosque, null, null, null,null);
+        bosque.setExits(laberinto, null, inicio, null,mordor);
+        laberinto.setExits(castillo, colegio, bosque, casaAbuela,null);
+        colegio.setExits(null, null, null, laberinto, null);
+        castillo.setExits(null, null, laberinto, null,null);
+        casaAbuela.setExits(null,laberinto,armario, null,null);
+        armario.setExits(casaAbuela, null, null, narnia,null);
+        narnia.setExits(null, casaAbuela, null, null,null);
+        mordor.setExits(null, null, null,null,null);
         currentRoom = inicio;  // comienza el juego afuera
     }
 
@@ -167,9 +167,6 @@ public class Game
         if(direction.equals("sureste")){
             nextRoom = currentRoom.southEastExit;
         }
-        if(direction.equals("noreste")){
-            nextRoom = currentRoom.northEastExit;
-        }
 
         if (nextRoom == null) {
             System.out.println("No hay puerta!!!");
@@ -224,10 +221,7 @@ public class Game
             }
             if(currentRoom.southEastExit != null){
                 System.out.print("sureste ");
-            }
-            if(currentRoom.northEastExit != null){
-                System.out.print("noreste ");
-            }
+            }          
             System.out.println();
         }
     }

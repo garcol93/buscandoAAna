@@ -23,7 +23,6 @@ public class Room
     public Room eastExit;
     public Room westExit;
     public Room southEastExit;
-    public Room northEastExit;
 
     /**
      * Crea una habitacion que describa "descripcion". Inicialmente, tiene
@@ -46,7 +45,7 @@ public class Room
      * @param sur La salida sur.
      * @param oeste La salida oeste.
      */
-    public void setExits(Room north, Room east, Room south, Room west, Room southEast , Room northEast) 
+    public void setExits(Room north, Room east, Room south, Room west, Room southEast) 
     {
         if(north != null)
             northExit = north;
@@ -58,8 +57,6 @@ public class Room
             westExit = west;
         if(southEast !=null)
             southEastExit = southEast;
-        if(northEast !=null)
-        northEastExit = northEast;
     }
 
     /**
