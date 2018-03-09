@@ -1,6 +1,6 @@
 import java.util.Random;
 /**
- * Esta clase es la clase principal de la aplicación "Buscando a Ana".
+ * Esta clase es la clase principal de la aplicacion "Buscando a Ana".
  * "Buscando a Ana" es un juego de aventura basado en texto muy simple.
  * Usuarios puede caminar alrededor de un paisaje buscando a ana. 
  *
@@ -8,7 +8,7 @@ import java.util.Random;
  * método.
  *
  * Esta clase principal crea e inicializa todas las demás: crea todas las
- * habitaciones, crea el analizador e inicia el juego. También evalúa y
+ * habitaciones, crea el analizador e inicia el juego. Tambien evalua y
  * ejecuta los comandos que devuelve el analizador.
  *
  * @author (garcol93) 
@@ -77,7 +77,7 @@ public class Game
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        System.out.println("Gracias por jugar. Adiós.");
+        System.out.println("Gracias por jugar. Adios.");
     }
 
     /**
@@ -90,7 +90,7 @@ public class Game
         System.out.println("Buscando a Ana es un juego en el que tendras que encontrar a la traviesa Ana");
         System.out.println("Escriba 'ayuda' si necesita algo.");
         System.out.println();
-        System.out.println("Usted está " + currentRoom.getDescription());
+        System.out.println("Usted esta " + currentRoom.getDescription());
         System.out.print("Posibles salidas: ");
         if(currentRoom.northExit != null) {
             System.out.print("norte ");
@@ -109,7 +109,7 @@ public class Game
 
     /**
      * Dado un comando, procese (es decir: ejecute) el comando.
-     * Comando @param El comando que se procesará.
+     * Comando @param El comando que se procesara.
      * @return true Si el comando finaliza el juego, de lo contrario, false.
      */
     private boolean processCommand(Command command) 
@@ -117,7 +117,7 @@ public class Game
         boolean wantToQuit = false;
 
         if(command.isUnknown()) {
-            System.out.println("No sé a qué te refieres ...");
+            System.out.println("No se a que te refieres ...");
             return false;
         }
 
@@ -138,13 +138,13 @@ public class Game
     // implementaciones de comandos de usuario:
 
     /**
-     * Imprima alguna información de ayuda.
-     * Aquí imprimimos un mensaje estúpido y críptico y una lista de los
+     * Imprima alguna informacion de ayuda.
+     * Aqui imprimimos un mensaje estúpido y críptico y una lista de los
      * palabras de comando.
      */
     private void printHelp() 
     {
-        System.out.println("Estás perdido? Asi como vas a encontrar a Ana.");
+        System.out.println("Estas perdido? Asi como vas a encontrar a Ana.");
         System.out.println(" Vagas alrededor del mundo de Ana.");
         System.out.println();
         System.out.println("Sus palabras de comando son:");
@@ -158,14 +158,14 @@ public class Game
     private void goRoom(Command command) 
     {
         if(!command.hasSecondWord()) {
-            // si no hay una segunda palabra, no sabemos a dónde ir ...
+            // si no hay una segunda palabra, no sabemos a donde ir ...
             System.out.println("A donde vamos?");
             return;
         }
 
         String direction = command.getSecondWord();
 
-        // Intenta salir de la habitación actual.
+        // Intenta salir de la habitacion actual.
         Room nextRoom = null;
         if(direction.equals("norte")) {
             nextRoom = currentRoom.northExit;
@@ -185,7 +185,7 @@ public class Game
         }
         else {
             currentRoom = nextRoom;
-            System.out.println("Usted está " + currentRoom.getDescription());
+            System.out.println("Usted esta " + currentRoom.getDescription());
             //comprueba si esta Ana
             if(currentRoom.getEstaAna() == true){
                 System.out.println("Por fin has encontrado Ana");
