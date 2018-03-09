@@ -1,14 +1,14 @@
 
 /**
- * class Room: una habitación en un juego de aventuras.
+ * class Room: una habitacion en un juego de aventuras.
  *
- * Esta clase es parte de la aplicación "Buscando a Ana".
+ * Esta clase es parte de la aplicacion "Buscando a Ana".
  * "Buscando a Ana" es un juego de aventura basado en texto muy simple.
  *
- * Una "Habitación" representa una ubicación en el escenario del juego. Es
+ * Una "Habitacion" representa una ubicacion en el escenario del juego. Es
  * conectado a otras habitaciones a través de salidas. Las salidas están etiquetadas al norte,
- * este, sur, oeste. Para cada dirección, la habitación almacena una referencia
- * a la habitación vecina, o null si no hay salida en esa dirección.
+ * este, sur, oeste. Para cada direccion, la habitacion almacena una referencia
+ * a la habitacion vecina, o null si no hay salida en esa direccion.
  *
  * Esta habitacion contendra un variable booleana que especificara si ahi esta Ana. 
  * @author (garcol93) 
@@ -22,13 +22,15 @@ public class Room
     public Room southExit;
     public Room eastExit;
     public Room westExit;
+    public Room southEastExit;
+    public Room northEastExit;
 
     /**
-     * Crea una habitación que describa "descripción". Inicialmente, tiene
-     * sin salidas. "descripción" es algo así como "una cocina" o
+     * Crea una habitacion que describa "descripcion". Inicialmente, tiene
+     * sin salidas. "descripcion" es algo asi como "una cocina" o
      * "un patio abierto"
      * tendra un boolean que indica si esta Ana.
-     * @param description Descripción de la sala.
+     * @param description Descripcion de la sala.
      */
     public Room(String description) 
     {
@@ -38,13 +40,13 @@ public class Room
 
     /**
      * Definir las salidas de esta sala. Todas las direcciones conducen
-     * a otra habitación o es nulo (no hay salida allí).
+     * a otra habitacion o es nulo (no hay salida alli).
      * @param norte La salida norte.
      * @param este El este este.
      * @param sur La salida sur.
      * @param oeste La salida oeste.
      */
-    public void setExits(Room north, Room east, Room south, Room west) 
+    public void setExits(Room north, Room east, Room south, Room west, Room southEast , Room northEast) 
     {
         if(north != null)
             northExit = north;
@@ -54,6 +56,10 @@ public class Room
             southExit = south;
         if(west != null)
             westExit = west;
+        if(southEast !=null)
+            southEastExit = southEast;
+        if(northEast !=null)
+        northEastExit = northEast;
     }
 
     /**
