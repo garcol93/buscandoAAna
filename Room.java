@@ -23,7 +23,7 @@ public class Room
     private Room eastExit;
     private Room westExit;
     private Room southEastExit;
-
+    private Room northEastExit;
     /**
      * Crea una habitacion que describa "descripcion". Inicialmente, tiene
      * sin salidas. "descripcion" es algo asi como "una cocina" o
@@ -43,8 +43,10 @@ public class Room
      * @param norte La salida norte.
      * @param este El este este.
      * @param sur La salida sur.   
+     * @param sureste La salida sureste.
+     * @param noreste La salida noreste.   
      */
-    public void setExits(Room north, Room east, Room south, Room west, Room southEast) 
+    public void setExits(Room north, Room east, Room south, Room west, Room southEast, Room northEast) 
     {
         if(north != null)
             northExit = north;
@@ -56,6 +58,8 @@ public class Room
             westExit = west;
         if(southEast !=null)
             southEastExit = southEast;
+        if(northEast !=null)
+        northEastExit = northEast; 
     }
 
     /**
@@ -104,6 +108,9 @@ public class Room
         if(direction.equals("sureste")){
             aDevolver = southEastExit;
         }        
+        if(direction.equals("noreste")){
+            aDevolver = northEastExit;
+        }
         return aDevolver;
     }
 
@@ -130,7 +137,10 @@ public class Room
             }
             if(southEastExit != null){
                 aDevolver+="sureste ";
-            }          
+            }     
+            if(northEastExit != null){
+                aDevolver+="noreste ";
+            }    
             if(aDevolver.equals("")){
             aDevolver+= "No hay salida. Tu pierdes";
             }
