@@ -44,13 +44,13 @@ public class Game
         narnia = new Room("en el mundo de Narnia algo no va bien");
         mordor = new Room("en Mordor lugar donde viven los orcos te han capturado");
         //habitaciones posibles donde esta Ana 
-        Room[] numeroRoom = {laberinto, colegio, castillo, casaAbuela, armario, narnia, mordor}; 
+        Room[] numeroRoom = {laberinto, colegio, castillo, casaAbuela, armario, narnia}; 
 
         //colocacion de Ana de manera aleatoria
         Random random = new Random();
         numeroRoom[random.nextInt(numeroRoom.length)].setEstaAna(true);
 
-        // puertas de salida de las Room(norte, este ,sur, oeste )
+        // puertas de salida de las Room(norte, este ,sur, oeste, sureste )
         inicio.setExits(bosque, null, null, null,null);
         bosque.setExits(laberinto, null, inicio, null,mordor);
         laberinto.setExits(castillo, colegio, bosque, casaAbuela,null);
@@ -150,29 +150,12 @@ public class Game
 
         String direction = command.getSecondWord();
 
-        // Intenta salir de la habitacion actual.
-        Room nextRoom = null;
-        if(direction.equals("norte")) {
-            nextRoom = currentRoom.northExit;
-        }
-        if(direction.equals("este")) {
-            nextRoom = currentRoom.eastExit;
-        }
-        if(direction.equals("sur")) {
-            nextRoom = currentRoom.southExit;
-        }
-        if(direction.equals("oeste")) {
-            nextRoom = currentRoom.westExit;
-        }
-        if(direction.equals("sureste")){
-            nextRoom = currentRoom.southEastExit;
-        }
-
-        if (nextRoom == null) {
+        // Intenta salir de la habitacion actual.         
+        if (currentRoom.getExit(direction)== null) {
             System.out.println("No hay puerta!!!");
         }
         else {
-            currentRoom = nextRoom;            
+            currentRoom = currentRoom.getExit(direction);
             printLocationInfo();
         }
     }
@@ -206,22 +189,7 @@ public class Game
             System.out.println("       Has Ganado!!!");          
         } 
         else{
-            System.out.print("Posibles salidas: ");
-            if(currentRoom.northExit != null) {
-                System.out.print("norte ");
-            }
-            if(currentRoom.eastExit != null) {
-                System.out.print("este ");
-            }
-            if(currentRoom.southExit != null) {
-                System.out.print("sur ");
-            }
-            if(currentRoom.westExit != null) {
-                System.out.print("oeste ");
-            }
-            if(currentRoom.southEastExit != null){
-                System.out.print("sureste ");
-            }          
+            System.out.println(currentRoom.getExitString());
             System.out.println();
         }
     }

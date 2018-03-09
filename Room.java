@@ -16,13 +16,13 @@
  */
 public class Room 
 {
-    public String description;
-    public boolean estaAna;
-    public Room northExit;
-    public Room southExit;
-    public Room eastExit;
-    public Room westExit;
-    public Room southEastExit;
+    private String description;
+    private boolean estaAna;
+    private Room northExit;
+    private Room southExit;
+    private Room eastExit;
+    private Room westExit;
+    private Room southEastExit;
 
     /**
      * Crea una habitacion que describa "descripcion". Inicialmente, tiene
@@ -42,8 +42,7 @@ public class Room
      * a otra habitacion o es nulo (no hay salida alli).
      * @param norte La salida norte.
      * @param este El este este.
-     * @param sur La salida sur.
-     * @param oeste La salida oeste.
+     * @param sur La salida sur.   
      */
     public void setExits(Room north, Room east, Room south, Room west, Room southEast) 
     {
@@ -81,6 +80,61 @@ public class Room
      */
     public void setEstaAna(boolean estaAqui)
     {
-      estaAna = estaAqui;
+        estaAna = estaAqui;
     }
-}
+
+    /**
+     * 
+     * @return  
+     */
+    public Room getExit(String direction)
+    {   Room aDevolver= null;
+        if (direction.equals("norte")){
+            aDevolver= northExit;          
+        }
+        if(direction.equals("este")) {
+            aDevolver = eastExit;
+        }
+        if(direction.equals("sur")) {
+            aDevolver = southExit;
+        }
+        if(direction.equals("oeste")) {
+            aDevolver = westExit;
+        }
+        if(direction.equals("sureste")){
+            aDevolver = southEastExit;
+        }        
+        return aDevolver;
+    }
+
+    /**
+     * Devuelve una descripción de las salidas de la habitación.
+     * Por ejemplo: "posibles salidas: norte este oeste"
+     *
+     * @ return Una descripción de las salidas disponibles.
+     */
+    public String getExitString(){   
+            System.out.print("Posibles salidas: ");
+            String aDevolver = "";            
+            if(northExit != null) {
+                aDevolver+="norte ";
+            }
+            if(eastExit != null) {
+                aDevolver+="este ";
+            }
+            if(southExit != null) {
+                aDevolver+="sur ";
+            }
+            if(westExit != null) {
+                aDevolver+="oeste ";
+            }
+            if(southEastExit != null){
+                aDevolver+="sureste ";
+            }          
+            if(aDevolver.equals("")){
+            aDevolver+= "No hay salida. Tu pierdes";
+            }
+            return aDevolver;
+        }
+    }
+
