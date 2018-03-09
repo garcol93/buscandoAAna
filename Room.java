@@ -1,4 +1,4 @@
-
+import java.util.HashMap;
 /**
  * class Room: una habitacion en un juego de aventuras.
  *
@@ -17,13 +17,8 @@
 public class Room 
 {
     private String description;
-    private boolean estaAna;
-    private Room northExit;
-    private Room southExit;
-    private Room eastExit;
-    private Room westExit;
-    private Room southEastExit;
-    private Room northEastExit;
+    private boolean estaAna;    
+    private HashMap<String , Room> exits;
     /**
      * Crea una habitacion que describa "descripcion". Inicialmente, tiene
      * sin salidas. "descripcion" es algo asi como "una cocina" o
@@ -35,6 +30,7 @@ public class Room
     {
         this.description = description;
         estaAna = false;
+        exits = new HashMap<>();
     }
 
     /**
@@ -48,18 +44,24 @@ public class Room
      */
     public void setExits(Room north, Room east, Room south, Room west, Room southEast, Room northEast) 
     {
-        if(north != null)
-            northExit = north;
-        if(east != null)
-            eastExit = east;
-        if(south != null)
-            southExit = south;
-        if(west != null)
-            westExit = west;
-        if(southEast !=null)
-            southEastExit = southEast;
-        if(northEast !=null)
-        northEastExit = northEast; 
+        if(north != null){
+            exits.put("norte", north);
+        }
+        if(east != null){
+            exits.put("este", east);
+        }
+        if(south != null){
+            exits.put("sur", south);
+        }
+        if(west != null){
+            exits.put("oeste", west);
+        }
+        if(southEast !=null){
+            exits.put("sureste", southEast);
+        }
+        if(northEast !=null){
+            exits.put("noreste", northEast);
+        }
     }
 
     /**
@@ -94,22 +96,22 @@ public class Room
     public Room getExit(String direction)
     {   Room aDevolver= null;
         if (direction.equals("norte")){
-            aDevolver= northExit;          
+            aDevolver= exits.get("norte");          
         }
         if(direction.equals("este")) {
-            aDevolver = eastExit;
+            aDevolver = exits.get("este");
         }
         if(direction.equals("sur")) {
-            aDevolver = southExit;
+            aDevolver = exits.get("sur");
         }
         if(direction.equals("oeste")) {
-            aDevolver = westExit;
+            aDevolver = exits.get("oeste");
         }
         if(direction.equals("sureste")){
-            aDevolver = southEastExit;
+            aDevolver = exits.get("sureste");
         }        
         if(direction.equals("noreste")){
-            aDevolver = northEastExit;
+            aDevolver = exits.get("noreste");
         }
         return aDevolver;
     }
@@ -121,30 +123,30 @@ public class Room
      * @ return Una descripción de las salidas disponibles.
      */
     public String getExitString(){   
-            System.out.print("Posibles salidas: ");
-            String aDevolver = "";            
-            if(northExit != null) {
-                aDevolver+="norte ";
-            }
-            if(eastExit != null) {
-                aDevolver+="este ";
-            }
-            if(southExit != null) {
-                aDevolver+="sur ";
-            }
-            if(westExit != null) {
-                aDevolver+="oeste ";
-            }
-            if(southEastExit != null){
-                aDevolver+="sureste ";
-            }     
-            if(northEastExit != null){
-                aDevolver+="noreste ";
-            }    
-            if(aDevolver.equals("")){
-            aDevolver+= "No hay salida. Tu pierdes";
-            }
-            return aDevolver;
+        System.out.print("Posibles salidas: ");
+        String aDevolver = "";            
+        if(exits.get("norte")!= null) {
+            aDevolver+="norte ";
         }
+        if(exits.get("este") != null) {
+            aDevolver+="este ";
+        }
+        if(exits.get("sur") != null) {
+            aDevolver+="sur ";
+        }
+        if(exits.get("oeste") != null) {
+            aDevolver+="oeste ";
+        }
+        if(exits.get("sureste")!= null){
+            aDevolver+="sureste ";
+        }     
+        if(exits.get("noreste") != null){
+            aDevolver+="noreste ";
+        }    
+        if(aDevolver.equals("")){
+            aDevolver+= "No hay salida. Tu pierdes";
+        }
+        return aDevolver;
     }
+}
 
