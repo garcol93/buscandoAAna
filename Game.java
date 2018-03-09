@@ -5,7 +5,7 @@ import java.util.Random;
  * Usuarios puede caminar alrededor de un paisaje buscando a ana. 
  *
  * Para jugar a este juego, crea una instancia de esta clase y llama al "Game"
- * método.
+ * metodo.
  *
  * Esta clase principal crea e inicializa todas las demás: crea todas las
  * habitaciones, crea el analizador e inicia el juego. Tambien evalua y
@@ -42,14 +42,14 @@ public class Game
         casaAbuela = new Room("en la casa de la abuela que esta haciendo la tortilla de patata");
         armario = new Room("en el armario un lugar un tanto oscuro");
         narnia = new Room("en el mundo de Narnia algo no va bien");
-        
+
         //habitaciones posibles donde esta Ana 
         Room[] numeroRoom = {laberinto, colegio, castillo, casaAbuela, armario, narnia}; 
-        
+
         //colocacion de Ana de manera aleatoria
         Random random = new Random();
         numeroRoom[random.nextInt(numeroRoom.length)].setEstaAna(true);
-        
+
         // puertas de salida de las Room(norte, este ,sur, oeste )
         inicio.setExits(bosque, null, null, null);
         bosque.setExits(laberinto, null, inicio, null);
@@ -89,22 +89,7 @@ public class Game
         System.out.println("Bienvenido al mundo de Ana");
         System.out.println("Buscando a Ana es un juego en el que tendras que encontrar a la traviesa Ana");
         System.out.println("Escriba 'ayuda' si necesita algo.");
-        System.out.println();
-        System.out.println("Usted esta " + currentRoom.getDescription());
-        System.out.print("Posibles salidas: ");
-        if(currentRoom.northExit != null) {
-            System.out.print("norte ");
-        }
-        if(currentRoom.eastExit != null) {
-            System.out.print("este ");
-        }
-        if(currentRoom.southExit != null) {
-            System.out.print("sur ");
-        }
-        if(currentRoom.westExit != null) {
-            System.out.print("oeste ");
-        }
-        System.out.println();
+        printLocationInfo();
     }
 
     /**
@@ -131,7 +116,7 @@ public class Game
         else if (commandWord.equals("salir")) {
             wantToQuit = quit(command);
         }
-         
+
         return wantToQuit;
     }
 
@@ -152,7 +137,7 @@ public class Game
     }
 
     /** 
-     * Intenta ir en una dirección. Si hay una salida, ingrese
+     * Intenta ir en una direccion. Si hay una salida, ingrese
      * la nueva sala; de lo contrario, imprima un mensaje de error.
      */
     private void goRoom(Command command) 
@@ -186,27 +171,7 @@ public class Game
         else {
             currentRoom = nextRoom;
             System.out.println("Usted esta " + currentRoom.getDescription());
-            //comprueba si esta Ana
-            if(currentRoom.getEstaAna() == true){
-                System.out.println("Por fin has encontrado Ana");
-                System.out.println("       Has Ganado!!!");          
-            } 
-            else{
-                System.out.print("Posibles salidas: ");
-                if(currentRoom.northExit != null) {
-                    System.out.print("norte ");
-                }
-                if(currentRoom.eastExit != null) {
-                    System.out.print("este ");
-                }
-                if(currentRoom.southExit != null) {
-                    System.out.print("sur ");
-                }
-                if(currentRoom.westExit != null) {
-                    System.out.print("oeste ");
-                }
-                System.out.println();
-            }
+            printLocationInfo();
         }
     }
 
@@ -225,4 +190,35 @@ public class Game
             return true;  // señal de que queremos abandonar
         }
     }   
+
+    /**
+     *este metodo imprime por pantalla la posicion actual.    
+     */
+    private void printLocationInfo()
+    {
+        System.out.println();
+        System.out.println("Usted esta " + currentRoom.getDescription());
+        //comprueba si esta Ana
+        if(currentRoom.getEstaAna() == true){
+            System.out.println("Por fin has encontrado Ana");
+            System.out.println("       Has Ganado!!!");          
+        } 
+        else{
+            System.out.print("Posibles salidas: ");
+            if(currentRoom.northExit != null) {
+                System.out.print("norte ");
+            }
+            if(currentRoom.eastExit != null) {
+                System.out.print("este ");
+            }
+            if(currentRoom.southExit != null) {
+                System.out.print("sur ");
+            }
+            if(currentRoom.westExit != null) {
+                System.out.print("oeste ");
+            }
+            System.out.println();
+        }
+    }
+
 }
