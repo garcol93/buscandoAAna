@@ -50,16 +50,32 @@ public class Game
         Random random = new Random();
         numeroRoom[random.nextInt(numeroRoom.length)].setEstaAna(true);
 
-        // puertas de salida de las Room(norte, este ,sur, oeste, sureste )
-        inicio.setExits(bosque, null, null, null,null);
-        bosque.setExits(laberinto, null, inicio, null,mordor);
-        laberinto.setExits(castillo, colegio, bosque, casaAbuela,null);
-        colegio.setExits(null, null, null, laberinto, null);
-        castillo.setExits(null, null, laberinto, null,null);
-        casaAbuela.setExits(null,laberinto,armario, null,null);
-        armario.setExits(casaAbuela, null, null, narnia,null);
-        narnia.setExits(null, casaAbuela, null, null,null);
-        mordor.setExits(null, null, null,null,null);
+        // puertas de salida de las Room
+        inicio.setExit("norte",bosque);
+        
+        bosque.setExit("norte",laberinto);
+        bosque.setExit("sur",inicio);
+        bosque.setExit("oeste",mordor);
+        
+        laberinto.setExit("norte",castillo);
+        laberinto.setExit("este",colegio);
+        laberinto.setExit("sur", bosque);
+        laberinto.setExit("oeste",casaAbuela);
+        
+        colegio.setExit("oeste", laberinto);
+        colegio.setExit("noreste", castillo);
+        
+        castillo.setExit("sur", laberinto);
+        castillo.setExit("sureste",colegio);
+        
+        casaAbuela.setExit("este",laberinto);
+        casaAbuela.setExit("sur",armario);
+        
+        armario.setExit("norte", casaAbuela);
+        armario.setExit("oeste", narnia);
+        
+        narnia.setExit("este", armario);
+        
         currentRoom = inicio;  // comienza el juego afuera
     }
 
