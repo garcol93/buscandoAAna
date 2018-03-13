@@ -105,6 +105,7 @@ public class Game
         System.out.println("Bienvenido al mundo de Ana");
         System.out.println("Buscando a Ana es un juego en el que tendras que encontrar a la traviesa Ana");
         System.out.println("Escriba 'ayuda' si necesita algo.");
+        System.out.println();
         printLocationInfo();
     }
 
@@ -197,17 +198,7 @@ public class Game
      */
     private void printLocationInfo()
     {
+        System.out.println(currentRoom.getLongDescription());       
         System.out.println();
-        System.out.println("Usted esta " + currentRoom.getDescription());
-        //comprueba si esta Ana
-        if(currentRoom.getEstaAna() == true){
-            System.out.println("Por fin has encontrado Ana");
-            System.out.println("       Has Ganado!!!");          
-        } 
-        else{
-            System.out.println(currentRoom.getExitString());
-            System.out.println();
         }
     }
-
-}

@@ -84,15 +84,34 @@ public class Room
      *
      * @ return Una descripción de las salidas disponibles.
      */
-    public String getExitString(){   
-        System.out.print("Posibles salidas: ");
+    public String getExitString()
+    {   
         Set<String> posiblesSalidas = exits.keySet();
-        String aDevolver = "";
+        String aDevolver ="Posibles salidas: ";
         for(String salida : posiblesSalidas){
             aDevolver += salida + " ";
         }          
-        if(aDevolver.equals("")){
+        if(aDevolver.equals("Posibles salidas: ")){
             aDevolver+= "No hay salida. Tu pierdes";
+        }
+        return aDevolver;
+    }
+
+    /**
+     * Devuelve una descripción larga de esta sala, de la forma:
+     * Estás en el 'nombre de la habitación'
+     * Salidas: noroeste noroeste
+     * @return Una descripción de la sala, incluidas las salidas.
+     */
+    public String getLongDescription()
+    {
+        String aDevolver = "Usted esta " + description + "\n" ;
+        //comprueba si esta Ana
+        if(estaAna){
+            aDevolver += "Por fin has encontrado Ana" + "\n" + "Has Ganado!!!";
+        }
+        else{
+            aDevolver += getExitString();
         }
         return aDevolver;
     }
