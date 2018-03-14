@@ -18,7 +18,8 @@ import java.util.Set;
 public class Room 
 {
     private String description;
-    private boolean estaAna;    
+    private boolean estaAna;
+    private Item item;
     private HashMap<String , Room> exits;
     /**
      * Crea una habitacion que describa "descripcion". Inicialmente, tiene
@@ -27,11 +28,12 @@ public class Room
      * tendra un boolean que indica si esta Ana.
      * @param description Descripcion de la sala.
      */
-    public Room(String description) 
+    public Room(String description, Item item) 
     {
         this.description = description;
         estaAna = false;
         exits = new HashMap<>();
+        this.item = item;
     }
 
     /**
@@ -106,6 +108,9 @@ public class Room
     public String getLongDescription()
     {
         String aDevolver = "Usted esta " + description + "\n" ;
+        if(item != null){
+         aDevolver += item.getInfoItem() + "\n";
+        }
         //comprueba si esta Ana
         if(estaAna){
             aDevolver += "Por fin has encontrado Ana" + "\n" + "Has Ganado!!!";
