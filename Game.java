@@ -136,6 +136,9 @@ public class Game
         else if (commandWord.equals("mirar")) {
             look();
         }
+        else if(commandWord.equals("comer")) {
+            eat();
+        }
 
         return wantToQuit;
     }
@@ -153,7 +156,7 @@ public class Game
         System.out.println(" Vagas alrededor del mundo de Ana.");
         System.out.println();
         System.out.println("Sus palabras de comando son:");
-        System.out.println("    ir, salir, ayuda, mirar ");
+        System.out.println("    ir, salir, ayuda, mirar, comer ");
     }
 
     /** 
@@ -211,6 +214,15 @@ public class Game
     private void look() 
     {
         System.out.println(currentRoom.getLongDescription());
+        System.out.println();
+    }
+    
+    /**
+     *este metodo imprime por pantalla que se ha comido   
+     */
+    private void eat() 
+    {
+        System.out.println("Has comido ahora y ya no tienes hambre");
         System.out.println();
     }
 }
