@@ -52,30 +52,30 @@ public class Game
 
         // puertas de salida de las Room
         inicio.setExit("norte",bosque);
-        
+
         bosque.setExit("norte",laberinto);
         bosque.setExit("sur",inicio);
         bosque.setExit("oeste",mordor);
-        
+
         laberinto.setExit("norte",castillo);
         laberinto.setExit("este",colegio);
         laberinto.setExit("sur", bosque);
         laberinto.setExit("oeste",casaAbuela);
-        
+
         colegio.setExit("oeste", laberinto);
         colegio.setExit("noreste", castillo);
-        
+
         castillo.setExit("sur", laberinto);
         castillo.setExit("sureste",colegio);
-        
+
         casaAbuela.setExit("este",laberinto);
         casaAbuela.setExit("sur",armario);
-        
+
         armario.setExit("norte", casaAbuela);
         armario.setExit("oeste", narnia);
-        
+
         narnia.setExit("este", armario);
-        
+
         currentRoom = inicio;  // comienza el juego afuera
     }
 
@@ -133,6 +133,9 @@ public class Game
         else if (commandWord.equals("salir")) {
             wantToQuit = quit(command);
         }
+        else if (commandWord.equals("mirar")) {
+            look();
+        }
 
         return wantToQuit;
     }
@@ -150,7 +153,7 @@ public class Game
         System.out.println(" Vagas alrededor del mundo de Ana.");
         System.out.println();
         System.out.println("Sus palabras de comando son:");
-        System.out.println("    ir, salir, ayuda ");
+        System.out.println("    ir, salir, ayuda, mirar ");
     }
 
     /** 
@@ -200,5 +203,14 @@ public class Game
     {
         System.out.println(currentRoom.getLongDescription());       
         System.out.println();
-        }
     }
+
+    /**
+     *este metodo imprime por pantalla la posicion actual y las posibles direcciones   
+     */
+    private void look() 
+    {
+        System.out.println(currentRoom.getLongDescription());
+        System.out.println();
+    }
+}
