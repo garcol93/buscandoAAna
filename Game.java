@@ -156,7 +156,7 @@ public class Game
         System.out.println(" Vagas alrededor del mundo de Ana.");
         System.out.println();
         System.out.println("Sus palabras de comando son:");
-        parser.showCommands();
+        System.out.println(parser.showCommands());
     }
 
     /** 
@@ -216,7 +216,7 @@ public class Game
         System.out.println(currentRoom.getLongDescription());
         System.out.println();
     }
-    
+
     /**
      *este metodo imprime por pantalla que se ha comido   
      */
