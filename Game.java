@@ -156,7 +156,7 @@ public class Game
         System.out.println(" Vagas alrededor del mundo de Ana.");
         System.out.println();
         System.out.println("Sus palabras de comando son:");
-        System.out.println("    ir, salir, ayuda, mirar, comer ");
+        parser.showCommands();
     }
 
     /** 

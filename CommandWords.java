@@ -35,7 +35,18 @@ public class CommandWords
             if(validCommands[i].equals(aString))
                 return true;
         }
-       // si llegamos aquí, la cadena no se encontró en los comandos
+        // si llegamos aquí, la cadena no se encontró en los comandos
         return false;
+    }
+
+    /**
+     * Imprime por pantalla todos los comandos v�lidos
+     */
+    public void showAll()
+    {
+        for (String command : validCommands) {
+            System.out.println(command + " ");
+        }
+        System.out.println();
     }
 }
