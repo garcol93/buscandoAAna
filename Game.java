@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Stack;
 /**
  * Esta clase es la clase principal de la aplicacion "Buscando a Ana".
  * "Buscando a Ana" es un juego de aventura basado en texto muy simple.
@@ -19,8 +20,7 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     //backRoom true estas en la habitacion anterior o primera
-    private boolean backRoom;
-    private Room anteriorRoom;
+    private Stack<Room> backsRoom;
     /**
      * Crea el juego e inicializa su mapa interno.
      */
@@ -28,7 +28,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
-        backRoom = true;
+        backsRoom = new Stack<>();
     }
 
     /**
@@ -193,10 +193,9 @@ public class Game
         if (currentRoom.getExit(direction)== null) {
             System.out.println("No hay puerta!!!");
         }
-        else {
-            anteriorRoom = currentRoom;
+        else { 
+            backsRoom.push(currentRoom);
             currentRoom = currentRoom.getExit(direction);
-            backRoom = false;
             printLocationInfo();
         }
     }
@@ -243,19 +242,18 @@ public class Game
         System.out.println("Has comido ahora y ya no tienes hambre");
         System.out.println();
     }
-    
+
     /**
      *este metodo le hace volver a la sala anterior 
      */
     private void back() 
-    {   
-        if(!backRoom){
-        backRoom = true;
-        currentRoom = anteriorRoom;
-        printLocationInfo();
-    }
-    else{
-        System.out.println("Lo siento no puedes volver");
-    }
+    {       
+        if(backsRoom.empty()){
+            System.out.println("Lo siento no puedes volver");
+        }
+        else{
+            currentRoom = backsRoom.pop();
+            printLocationInfo();
+        }
     }
 }
