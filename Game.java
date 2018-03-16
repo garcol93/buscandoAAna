@@ -17,14 +17,18 @@ import java.util.Random;
 public class Game 
 {
     private Parser parser;
-    private Room currentRoom;    
+    private Room currentRoom;
+    //backRoom true estas en la habitacion anterior o primera
+    private boolean backRoom;
+    private Room anteriorRoom;
     /**
      * Crea el juego e inicializa su mapa interno.
      */
     public Game() 
     {
         createRooms();
-        parser = new Parser();        
+        parser = new Parser();
+        backRoom = true;
     }
 
     /**
@@ -148,6 +152,9 @@ public class Game
         else if(commandWord.equals("comer")) {
             eat();
         }
+        else if(commandWord.equals("volver")){
+            back();
+        }
 
         return wantToQuit;
     }
@@ -187,7 +194,9 @@ public class Game
             System.out.println("No hay puerta!!!");
         }
         else {
+            anteriorRoom = currentRoom;
             currentRoom = currentRoom.getExit(direction);
+            backRoom = false;
             printLocationInfo();
         }
     }
@@ -233,5 +242,20 @@ public class Game
     {
         System.out.println("Has comido ahora y ya no tienes hambre");
         System.out.println();
+    }
+    
+    /**
+     *este metodo le hace volver a la sala anterior 
+     */
+    private void back() 
+    {   
+        if(!backRoom){
+        backRoom = true;
+        currentRoom = anteriorRoom;
+        printLocationInfo();
+    }
+    else{
+        System.out.println("Lo siento no puedes volver");
+    }
     }
 }
