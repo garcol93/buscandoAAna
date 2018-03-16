@@ -31,25 +31,19 @@ public class Game
      * Crea todas las salas y vincula sus salidas juntas.
      */
     private void createRooms()
-    {
-        //crea los Items
-        Item jeringa, tortilla, caramelo;
-        
-        tortilla = new Item("una tortilla de patata de la abuela ", 800);
-        jeringa = new Item("una jeringa con un aspecto asqueroso ", 5);
-        caramelo = new Item("un caramelo con un aspecto delicioso ", 5);
+    {        
         // crea las habitaciones(Room)
         Room inicio, bosque, laberinto, colegio, castillo, casaAbuela, armario, narnia, mordor;        
-        
-        inicio = new Room("en la entrada al mundo de Ana", null);
-        bosque = new Room("en el bosque te llamas Ana?" , null);
-        laberinto = new Room("en el laberinto donde se pinchan los yonkis",jeringa);
-        colegio = new Room("en el colegio donde Jorge reparte caramelos",caramelo);
-        castillo = new Room("en el castillo donde la reina los ve a todos ociosos",null);
-        casaAbuela = new Room("en la casa de la abuela que esta haciendo la tortilla de patata",tortilla);
-        armario = new Room("en el armario un lugar un tanto oscuro", null);
-        narnia = new Room("en el mundo de Narnia algo no va bien", null);
-        mordor = new Room("en Mordor lugar donde viven los orcos te han capturado", null);
+
+        inicio = new Room("en la entrada al mundo de Ana");
+        bosque = new Room("en el bosque te llamas Ana?");
+        laberinto = new Room("en el laberinto donde se pinchan los yonkis");
+        colegio = new Room("en el colegio donde Jorge reparte caramelos");
+        castillo = new Room("en el castillo donde la reina los ve a todos ociosos");
+        casaAbuela = new Room("en la casa de la abuela que esta haciendo la tortilla de patata");
+        armario = new Room("en el armario un lugar un tanto oscuro");
+        narnia = new Room("en el mundo de Narnia algo no va bien");
+        mordor = new Room("en Mordor lugar donde viven los orcos te han capturado");
         //habitaciones posibles donde esta Ana 
         Room[] numeroRoom = {laberinto, colegio, castillo, casaAbuela, armario, narnia}; 
 
@@ -82,6 +76,14 @@ public class Game
         armario.setExit("oeste", narnia);
 
         narnia.setExit("este", armario);
+
+        //crea los Items y añade
+        casaAbuela.addItem(new Item("una tortilla de patata de la abuela ", 800));
+        laberinto.addItem(new Item("una jeringa con un aspecto asqueroso ", 5));
+        colegio.addItem(new Item("un caramelo con un aspecto delicioso ", 5));
+        colegio.addItem(new Item("una goma de borrar ", 5));
+        laberinto.addItem(new Item("una rata muerta ",200));
+        mordor.addItem(new Item("un cubo hasta arriba de meadas ",200));
 
         currentRoom = inicio;  // comienza el juego afuera
     }

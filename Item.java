@@ -10,7 +10,6 @@ public class Item
     // instance variables - replace the example below with your own
     private String descripcionItem;
     private int peso;
-
     /**
      * Crea un Item descrito "descripcion" con "peso". Inicialmente, 
      * @param description Descripcion del Item.
@@ -21,7 +20,7 @@ public class Item
         descripcionItem = descripcion;
         this.peso = peso;
     }
-
+    
     /**
      * @return descripcion del Item.
      */
@@ -43,6 +42,8 @@ public class Item
      */
     public String getInfoItem()
     { 
-        return "Hay " + getDescriptionItem() + "su peso es de " + getPesoItem() + "gramos";
+        return "Hay " + getDescriptionItem() + "su peso es de " + getPesoItem() + " gramos";
     }
+    
+    
 }

@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Set;
+import java.util.ArrayList;
 /**
  * class Room: una habitacion en un juego de aventuras.
  *
@@ -19,7 +20,7 @@ public class Room
 {
     private String description;
     private boolean estaAna;
-    private Item item;
+    private ArrayList<Item> items;
     private HashMap<String , Room> exits;
     /**
      * Crea una habitacion que describa "descripcion". Inicialmente, tiene
@@ -28,12 +29,12 @@ public class Room
      * tendra un boolean que indica si esta Ana.
      * @param description Descripcion de la sala.
      */
-    public Room(String description, Item item) 
+    public Room(String description) 
     {
         this.description = description;
         estaAna = false;
         exits = new HashMap<>();
-        this.item = item;
+        items = new ArrayList<>();
     }
 
     /**
@@ -44,6 +45,16 @@ public class Room
     public void setExit(String direction, Room nextRoom)
     {
         exits.put(direction, nextRoom);
+    }
+
+    /**
+     * Definir objetos de una sala.
+     * @param Room la habitacion donde esta el objeto
+     * @param nextRoom La habitación en la dirección dada.
+     */
+    public void addItem(Item item)
+    {
+        items.add(item);
     }
 
     /**
@@ -108,8 +119,10 @@ public class Room
     public String getLongDescription()
     {
         String aDevolver = "Usted esta " + description + "\n" ;
-        if(item != null){
-         aDevolver += item.getInfoItem() + "\n";
+        if(items != null){
+            for(Item itemActual : items){
+                aDevolver += itemActual.getInfoItem() + "\n";
+            }
         }
         //comprueba si esta Ana
         if(estaAna){
