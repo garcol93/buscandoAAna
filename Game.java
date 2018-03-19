@@ -1,5 +1,6 @@
 import java.util.Random;
 import java.util.Stack;
+import java.util.ArrayList;
 /**
  * Esta clase es la clase principal de la aplicacion "Buscando a Ana".
  * "Buscando a Ana" es un juego de aventura basado en texto muy simple.
@@ -21,6 +22,9 @@ public class Game
     private Room currentRoom;
     //backRoom true estas en la habitacion anterior o primera
     private Stack<Room> backsRoom;
+    private static final int PESO_MAX = 800;
+    private int pesoActual;
+    private ArrayList<Item> mochila;
     /**
      * Crea el juego e inicializa su mapa interno.
      */
@@ -29,6 +33,8 @@ public class Game
         createRooms();
         parser = new Parser();
         backsRoom = new Stack<>();
+        mochila = new ArrayList<>();
+        pesoActual = 0; 
     }
 
     /**
@@ -60,7 +66,7 @@ public class Game
 
         bosque.setExit("norte",laberinto);
         bosque.setExit("sur",inicio);
-        bosque.setExit("oeste",mordor);
+        bosque.setExit("sureste",mordor);
 
         laberinto.setExit("norte",castillo);
         laberinto.setExit("este",colegio);
@@ -81,13 +87,22 @@ public class Game
 
         narnia.setExit("este", armario);
 
-        //crea los Items y añade
-        casaAbuela.addItem(new Item("una tortilla de patata de la abuela ", 800));
-        laberinto.addItem(new Item("una jeringa con un aspecto asqueroso ", 5));
-        colegio.addItem(new Item("un caramelo con un aspecto delicioso ", 5));
-        colegio.addItem(new Item("una goma de borrar ", 5));
-        laberinto.addItem(new Item("una rata muerta ",200));
-        mordor.addItem(new Item("un cubo hasta arriba de meadas ",200));
+        //crea los Items 
+        Item jeringa, tortilla, caramelo, goma, rata, cubo;
+
+        tortilla = new Item("tortilla", "una tortilla de patata de la abuela ", 800 ,true);
+        jeringa = new Item("jeringa", "una jeringa con un aspecto asqueroso ", 5, true);
+        caramelo = new Item("caramelo", "un caramelo con un aspecto delicioso ", 5, true);
+        goma = new Item("goma","una goma de borrar ", 5,true);
+        rata = new Item("rata","una rata muerta ",200,true);
+        cubo = new Item("cubo", "un cubo hasta arriba de meadas ",200,false);
+        //añade items
+        casaAbuela.addItem(tortilla);
+        laberinto.addItem(jeringa);
+        colegio.addItem(caramelo);
+        colegio.addItem(goma);
+        laberinto.addItem(rata);
+        mordor.addItem(cubo);
 
         currentRoom = inicio;  // comienza el juego afuera
     }
@@ -154,6 +169,15 @@ public class Game
         }
         else if(commandWord.equals("volver")){
             back();
+        }
+        else if(commandWord.equals("coger")){
+            take(command.getSecondWord());
+        }
+        else if(commandWord.equals("dejar")){
+            drop(command.getSecondWord());
+        }
+        else if(commandWord.equals("mochila")){
+            itemsMochila();
         }
 
         return wantToQuit;
@@ -254,6 +278,96 @@ public class Game
         else{
             currentRoom = backsRoom.pop();
             printLocationInfo();
+        }
+    }
+
+    /**
+     * @param item que se quiere añadir a la mochila
+     */
+    private void addItemMochila(Item item)
+    {
+        mochila.add(item);
+    }  
+
+    /**
+     *este metodo le permite coger objetos
+     *@param item que desea recoger
+     */
+    private void take(String nombre) 
+    {   
+        ArrayList<Item> itemsRoom = currentRoom.getArrayListItems();
+        Item item = null;
+        for(int i=0;i < itemsRoom.size(); i++)
+        {
+            if(itemsRoom.get(i).getNombre().equals(nombre))
+            {
+                item= itemsRoom.get(i);
+            }
+        }
+        if(item.getPuedoCoger() && item != null){
+            int pesoTotal = pesoActual + item.getPesoItem();
+            boolean buscando = true;
+            int contador = 0;            
+            if(pesoTotal <= PESO_MAX){
+                mochila.add(item);
+                pesoActual += item.getPesoItem();
+                itemsRoom.remove(item);
+                System.out.println("Se añadio a la mochila " + nombre);
+            }
+            else{
+                System.out.println("Lo siento no puedes llevar tanto peso a la vez");
+            }            
+        }
+        else{
+            System.out.println("Lo siento no puedes coger este objeto");
+        }
+    }
+
+    /**
+     *este metodo le permite dejar objetos
+     *@param item que desea soltar
+     */
+    private void drop(String nombre)
+    {                 
+        if(mochila.size() > 0){
+            boolean buscando = true;
+            int contador = 0;
+            Item item = null;
+            while(buscando)
+            {
+                if(mochila.get(contador).getNombre().equals(nombre)){
+                    item = mochila.get(contador);
+                    currentRoom.addItem(item);
+                    buscando = false;
+                    pesoActual -= item.getPesoItem();
+                    mochila.remove(contador);
+                }
+                contador++;
+            }
+            System.out.println("Se dejo " + nombre);
+        }
+        else
+        {
+            System.out.println("La mochila esta vacia");
+        }
+    }   
+
+    /**
+     *este metodo imprime los objetos de la mochila
+     */
+    private void itemsMochila()
+    {   
+        String texto = "En la mochila llevas: ";
+        if(mochila.size() > 0){
+            for(Item objeto : mochila)
+            {
+                texto += objeto.getNombre() + " ";         
+            }
+            texto += "\n"+ "El peso de la mochila es :" + pesoActual + "g";
+            System.out.println(texto);
+        }
+        else{
+            System.out.println("La mochila esta vacia");
         }
     }
 }

@@ -49,14 +49,22 @@ public class Room
 
     /**
      * Definir objetos de una sala.
-     * @param Room la habitacion donde esta el objeto
-     * @param nextRoom La habitación en la dirección dada.
+     * @param item que se quiere añadir a la habitacion
      */
     public void addItem(Item item)
     {
         items.add(item);
     }
 
+    /**
+     * eliminar objetos de una sala.
+     * @param posicion del item que se quiere eliminar de la habitacion
+     */
+    public void removeItem(int posicion)
+    {
+        items.remove(posicion);
+    }
+    
     /**
      * @return descripcion de la habitacion.
      */
@@ -74,6 +82,14 @@ public class Room
         return estaAna;
     }
 
+    /**
+     * @return ArrayList items
+     */
+    public ArrayList getArrayListItems()
+    {
+        return items;
+    }
+    
     /**
      * cambia el valor de esta Ana.
      */

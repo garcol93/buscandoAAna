@@ -13,7 +13,7 @@ public class CommandWords
 {
     // una matriz constante que contiene todas las palabras de comando válidas
     private static final String[] validCommands = {
-            "ir", "salir", "ayuda", "mirar", "comer", "volver"
+            "ir", "salir", "ayuda", "mirar", "comer", "volver" ,"coger", "dejar", "mochila"
         };
 
     /**
