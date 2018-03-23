@@ -65,7 +65,7 @@ public class Game
 
         bosque.setExit("norte",laberinto);
         bosque.setExit("sur",inicio);
-        bosque.setExit("oeste",mordor);
+        bosque.setExit("sureste",mordor);
 
         laberinto.setExit("norte",castillo);
         laberinto.setExit("este",colegio);
@@ -87,12 +87,12 @@ public class Game
         narnia.setExit("este", armario);
 
         //crea los Items y añade
-        casaAbuela.addItem(new Item("una tortilla de patata de la abuela ", 800));
-        laberinto.addItem(new Item("una jeringa con un aspecto asqueroso ", 5));
-        colegio.addItem(new Item("un caramelo con un aspecto delicioso ", 5));
-        colegio.addItem(new Item("una goma de borrar ", 5));
-        laberinto.addItem(new Item("una rata muerta ",200));
-        mordor.addItem(new Item("un cubo hasta arriba de meadas ",200));
+        casaAbuela.addItem(new Item("tortilla","una tortilla de patata de la abuela ", true, 800));
+        laberinto.addItem(new Item("jeringa","una jeringa con un aspecto asqueroso ", true, 5));
+        colegio.addItem(new Item("caramelo","un caramelo con un aspecto delicioso ", true, 5));
+        colegio.addItem(new Item("goma","una goma de borrar ", true, 5));
+        laberinto.addItem(new Item("rata","una rata muerta ", true, 200));
+        mordor.addItem(new Item("cubo","un cubo hasta arriba de meadas ", false, 200));
 
          return inicio; // comienza el juego afuera
     }
@@ -160,7 +160,15 @@ public class Game
         else if(commandWord.equals("volver")){
             player.back();
         }
-
+        else if(commandWord.equals("coger")){
+            player.take(command.getSecondWord());
+        }
+         else if(commandWord.equals("mochila")){
+            player.itemsMochila(); 
+        }
+        else if(commandWord.equals("dejar")){
+            player.drop(command.getSecondWord());
+        }
         return wantToQuit;
     }
 

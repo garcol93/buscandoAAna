@@ -133,5 +133,34 @@ public class Room
         }
         return aDevolver;
     }
+    
+    /**
+     * @return buscaObjetos
+     */
+    public Item getObjetos(String nombre)
+    {
+        int i=0;
+        Item item = null;
+        boolean buscando = true;
+        while(buscando)
+        {
+            if(items.get(i).getId().equals(nombre))
+            {
+                item= items.get(i);
+                buscando = false;
+            }
+            i++;
+        }
+        return item;
+    }
+    
+    /**
+     * eliminar objetos de una sala.
+     * @param posicion del item que se quiere eliminar de la habitacion
+     */
+    public void removeItem(Item item)
+    {
+        items.remove(item);
+    }
 }
 
