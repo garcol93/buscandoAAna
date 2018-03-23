@@ -100,7 +100,7 @@ public class Player
     /**
      * @param item que se quiere a?adir a la mochila
      */
-    private void addItemMochila(Item item)
+    public void addItemMochila(Item item)
     {
         mochila.add(item);
     }  
@@ -109,7 +109,7 @@ public class Player
      *este metodo le permite coger objetos
      *@param item que desea recoger
      */
-    private void take(String nombre) 
+    public void take(String nombre) 
     {               
         Item item = currentRoom.getObjetos(nombre);       
         if(item != null){                                      

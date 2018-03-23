@@ -87,12 +87,12 @@ public class Game
         narnia.setExit("este", armario);
 
         //crea los Items y añade
-        casaAbuela.addItem(new Item("una tortilla de patata de la abuela ", 800));
-        laberinto.addItem(new Item("una jeringa con un aspecto asqueroso ", 5));
-        colegio.addItem(new Item("un caramelo con un aspecto delicioso ", 5));
-        colegio.addItem(new Item("una goma de borrar ", 5));
-        laberinto.addItem(new Item("una rata muerta ",200));
-        mordor.addItem(new Item("un cubo hasta arriba de meadas ",200));
+        casaAbuela.addItem(new Item("tortilla","una tortilla de patata de la abuela "));
+        laberinto.addItem(new Item("jeringa","una jeringa con un aspecto asqueroso "));
+        colegio.addItem(new Item("caramelo","un caramelo con un aspecto delicioso "));
+        colegio.addItem(new Item("goma","una goma de borrar "));
+        laberinto.addItem(new Item("rata","una rata muerta "));
+        mordor.addItem(new Item("cubo","un cubo hasta arriba de meadas "));
 
          return inicio; // comienza el juego afuera
     }
@@ -160,7 +160,9 @@ public class Game
         else if(commandWord.equals("volver")){
             player.back();
         }
-
+        else if(commandWord.equals("coger")){
+            player.take(command.getSecondWord());
+        }
         return wantToQuit;
     }
 
