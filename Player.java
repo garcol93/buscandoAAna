@@ -62,9 +62,9 @@ public class Player
             currentRoom = currentRoom.getExit(direction);
             look();
         }
-                
+
     }
-    
+
     /**
      *este metodo imprime por pantalla la posicion actual y las posibles direcciones   
      */
@@ -73,7 +73,7 @@ public class Player
         System.out.println(currentRoom.getLongDescription());
         System.out.println();
     }
-    
+
     /**
      *este metodo imprime por pantalla que se ha comido   
      */
@@ -82,7 +82,7 @@ public class Player
         System.out.println("Has comido ahora y ya no tienes hambre");
         System.out.println();
     }
-    
+
     /**
      *este metodo le hace volver a la sala anterior 
      */
@@ -96,7 +96,7 @@ public class Player
             look();
         }
     }
-    
+
     /**
      * @param item que se quiere a?adir a la mochila
      */
@@ -104,19 +104,19 @@ public class Player
     {
         mochila.add(item);
     }  
-    
-     /**
+
+    /**
      *este metodo le permite coger objetos
      *@param item que desea recoger
      */
     public void take(String nombre) 
     {               
         Item item = currentRoom.getObjetos(nombre);       
-        if(item != null){                                      
-                mochila.add(item);
-                currentRoom.removeItem(item);
-                System.out.println("Se añadio a la mochila " + nombre);
-            }           
+        if(item.getPuedoCoger() && item != null){                                
+            mochila.add(item);
+            currentRoom.removeItem(item);
+            System.out.println("Se añadio a la mochila " + nombre); 
+        }
         else{
             System.out.println("Lo siento no puedes coger este objeto");
         }

@@ -87,12 +87,12 @@ public class Game
         narnia.setExit("este", armario);
 
         //crea los Items y añade
-        casaAbuela.addItem(new Item("tortilla","una tortilla de patata de la abuela "));
-        laberinto.addItem(new Item("jeringa","una jeringa con un aspecto asqueroso "));
-        colegio.addItem(new Item("caramelo","un caramelo con un aspecto delicioso "));
-        colegio.addItem(new Item("goma","una goma de borrar "));
-        laberinto.addItem(new Item("rata","una rata muerta "));
-        mordor.addItem(new Item("cubo","un cubo hasta arriba de meadas "));
+        casaAbuela.addItem(new Item("tortilla","una tortilla de patata de la abuela ", true));
+        laberinto.addItem(new Item("jeringa","una jeringa con un aspecto asqueroso ", true));
+        colegio.addItem(new Item("caramelo","un caramelo con un aspecto delicioso ", true));
+        colegio.addItem(new Item("goma","una goma de borrar ", true));
+        laberinto.addItem(new Item("rata","una rata muerta ", true));
+        mordor.addItem(new Item("cubo","un cubo hasta arriba de meadas ", false));
 
          return inicio; // comienza el juego afuera
     }

@@ -10,15 +10,17 @@ public class Item
     private String id;
     private String descripcionItem;
     private int peso;
+    private boolean puedoCoger;
     /**
      * Crea un Item descrito "descripcion" con "peso". Inicialmente, 
      * @param description Descripcion del Item.
      * @param peso Peso del Item.
      */
-    public Item(String nombre ,String descripcion)
+    public Item(String nombre ,String descripcion,boolean puedoCoger)
     {
         id = nombre;
         descripcionItem = descripcion;
+        this.puedoCoger = puedoCoger;
     }
 
     /**
@@ -45,4 +47,11 @@ public class Item
         return "Hay " + getDescriptionItem();
     }
 
+    /**
+     * @return boolean true si se puede coger false si no
+     */
+    public boolean getPuedoCoger()
+    {
+        return puedoCoger;
+    }
 }
