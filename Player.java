@@ -112,11 +112,17 @@ public class Player
     public void take(String nombre) 
     {               
         Item item = currentRoom.getObjetos(nombre);       
-        if(item.getPuedoCoger() && item != null){                        
-            mochila.add(item);
-            pesoActual += item.getPesoItem();
-            currentRoom.removeItem(item);
-            System.out.println("Se añadio a la mochila " + nombre);                               
+        if(item.getPuedoCoger() && item != null){
+            int pesoTotal = pesoActual + item.getPesoItem();                      
+            if(pesoTotal <= PESO_MAX){
+                mochila.add(item);
+                pesoActual += item.getPesoItem();
+                currentRoom.removeItem(item);
+                System.out.println("Se añadio a la mochila " + nombre);
+            }
+            else{
+                System.out.println("Lo siento no puedes llevar tanto peso a la vez");
+            }            
         }
         else{
             System.out.println("Lo siento no puedes coger este objeto");

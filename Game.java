@@ -65,7 +65,7 @@ public class Game
 
         bosque.setExit("norte",laberinto);
         bosque.setExit("sur",inicio);
-        bosque.setExit("oeste",mordor);
+        bosque.setExit("sureste",mordor);
 
         laberinto.setExit("norte",castillo);
         laberinto.setExit("este",colegio);
