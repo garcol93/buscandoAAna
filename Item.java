@@ -15,12 +15,14 @@ public class Item
      * Crea un Item descrito "descripcion" con "peso". Inicialmente, 
      * @param description Descripcion del Item.
      * @param peso Peso del Item.
+     * @param puedoCojer true se puede cojer .
      */
-    public Item(String nombre ,String descripcion,boolean puedoCoger)
+    public Item(String nombre ,String descripcion,boolean puedoCoger, int peso)
     {
         id = nombre;
         descripcionItem = descripcion;
         this.puedoCoger = puedoCoger;
+        this.peso = peso;
     }
 
     /**
@@ -53,5 +55,13 @@ public class Item
     public boolean getPuedoCoger()
     {
         return puedoCoger;
+    }
+    
+    /**
+     * @return peso del Item.
+     */
+    public int getPesoItem()
+    {
+        return peso;
     }
 }

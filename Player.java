@@ -121,4 +121,23 @@ public class Player
             System.out.println("Lo siento no puedes coger este objeto");
         }
     }
+    
+    /**
+     *este metodo imprime los objetos de la mochila
+     */
+    public void itemsMochila()
+    {   
+        String texto = "En la mochila llevas: ";
+        if(mochila.size() > 0){
+            for(Item objeto : mochila)
+            {
+                texto += objeto.getId() + " ";         
+            }
+            texto += "\n"+ "El peso de la mochila es :" + pesoActual + "g";
+            System.out.println(texto);
+        }
+        else{
+            System.out.println("La mochila esta vacia");
+        }
+    }
 }
