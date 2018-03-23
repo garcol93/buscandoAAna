@@ -112,16 +112,17 @@ public class Player
     public void take(String nombre) 
     {               
         Item item = currentRoom.getObjetos(nombre);       
-        if(item.getPuedoCoger() && item != null){                                
+        if(item.getPuedoCoger() && item != null){                        
             mochila.add(item);
+            pesoActual += item.getPesoItem();
             currentRoom.removeItem(item);
-            System.out.println("Se añadio a la mochila " + nombre); 
+            System.out.println("Se añadio a la mochila " + nombre);                               
         }
         else{
             System.out.println("Lo siento no puedes coger este objeto");
         }
     }
-    
+
     /**
      *este metodo imprime los objetos de la mochila
      */
@@ -140,4 +141,34 @@ public class Player
             System.out.println("La mochila esta vacia");
         }
     }
+
+    /**
+     *este metodo le permite dejar objetos
+     *@param item que desea soltar
+     */
+    public void drop(String nombre)
+    {                 
+        if(mochila.size() > 0){
+            boolean buscando = true;
+            int contador = 0;
+            Item item = null;
+            while(buscando)
+            {
+                if(mochila.get(contador).getId().equals(nombre)){
+                    item = mochila.get(contador);
+                    currentRoom.addItem(item);
+                    buscando = false;
+                    pesoActual -= item.getPesoItem();
+                    mochila.remove(contador);
+                }
+                contador++;
+            }
+            System.out.println("Se dejo " + nombre);
+        }
+        else
+        {
+            System.out.println("La mochila esta vacia");
+        }
+    }   
+
 }

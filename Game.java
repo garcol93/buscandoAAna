@@ -164,7 +164,10 @@ public class Game
             player.take(command.getSecondWord());
         }
          else if(commandWord.equals("mochila")){
-            player.itemsMochila();
+            player.itemsMochila(); 
+        }
+        else if(commandWord.equals("dejar")){
+            player.drop(command.getSecondWord());
         }
         return wantToQuit;
     }
