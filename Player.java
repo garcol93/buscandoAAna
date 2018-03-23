@@ -1,4 +1,5 @@
 import java.util.Stack;
+import java.util.ArrayList;
 /**
  * Write a description of class Player here.
  * 
@@ -9,12 +10,17 @@ public class Player
 {
     private Room currentRoom;
     private Stack<Room> backsRoom;
+    private static final int PESO_MAX = 800;
+    private int pesoActual;
+    private ArrayList<Item> mochila;
     /**
      * Constructor for objects of class Player
      */
     public Player()
     {
         backsRoom = new Stack<>();
+        mochila = new ArrayList<>();
+        pesoActual = 0; 
     }
 
     /**
@@ -88,6 +94,31 @@ public class Player
         else{
             currentRoom = backsRoom.pop();
             look();
+        }
+    }
+    
+    /**
+     * @param item que se quiere a?adir a la mochila
+     */
+    private void addItemMochila(Item item)
+    {
+        mochila.add(item);
+    }  
+    
+     /**
+     *este metodo le permite coger objetos
+     *@param item que desea recoger
+     */
+    private void take(String nombre) 
+    {               
+        Item item = currentRoom.getObjetos(nombre);       
+        if(item != null){                                      
+                mochila.add(item);
+                currentRoom.removeItem(item);
+                System.out.println("Se añadio a la mochila " + nombre);
+            }           
+        else{
+            System.out.println("Lo siento no puedes coger este objeto");
         }
     }
 }

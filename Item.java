@@ -1,4 +1,3 @@
-
 /**
  * Write a description of class Item here.
  * 
@@ -8,6 +7,7 @@
 public class Item
 {
     // instance variables - replace the example below with your own
+    private String id;
     private String descripcionItem;
     private int peso;
     /**
@@ -15,12 +15,20 @@ public class Item
      * @param description Descripcion del Item.
      * @param peso Peso del Item.
      */
-    public Item(String descripcion , int peso )
+    public Item(String nombre ,String descripcion)
     {
+        id = nombre;
         descripcionItem = descripcion;
-        this.peso = peso;
     }
-    
+
+    /**
+     * @return nombre del Item.
+     */
+    public String getId()
+    {
+        return id;
+    }
+
     /**
      * @return descripcion del Item.
      */
@@ -28,22 +36,13 @@ public class Item
     {
         return descripcionItem;
     }
-
-    /**
-     * @return peso del Item.
-     */
-    public int getPesoItem()
-    {
-        return peso;
-    }
-
+   
     /**
      * @return info del Item.
      */
     public String getInfoItem()
     { 
-        return "Hay " + getDescriptionItem() + "su peso es de " + getPesoItem() + " gramos";
+        return "Hay " + getDescriptionItem();
     }
-    
-    
+
 }
