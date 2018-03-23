@@ -60,11 +60,11 @@ public class Room
      * eliminar objetos de una sala.
      * @param posicion del item que se quiere eliminar de la habitacion
      */
-    public void removeItem(int posicion)
+    public void removeItem(Item item)
     {
-        items.remove(posicion);
+        items.remove(item);
     }
-    
+
     /**
      * @return descripcion de la habitacion.
      */
@@ -83,13 +83,25 @@ public class Room
     }
 
     /**
-     * @return ArrayList items
+     * @return buscaObjetos
      */
-    public ArrayList getArrayListItems()
+    public Item getObjetos(String nombre)
     {
-        return items;
+        int i=0;
+        Item item = null;
+        boolean buscando = true;
+        while(buscando)
+        {
+            if(items.get(i).getNombre().equals(nombre))
+            {
+                item= items.get(i);
+                buscando = false;
+            }
+            i++;
+        }
+        return item;
     }
-    
+
     /**
      * cambia el valor de esta Ana.
      */

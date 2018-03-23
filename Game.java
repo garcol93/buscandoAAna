@@ -294,24 +294,14 @@ public class Game
      *@param item que desea recoger
      */
     private void take(String nombre) 
-    {   
-        ArrayList<Item> itemsRoom = currentRoom.getArrayListItems();
-        Item item = null;
-        for(int i=0;i < itemsRoom.size(); i++)
-        {
-            if(itemsRoom.get(i).getNombre().equals(nombre))
-            {
-                item= itemsRoom.get(i);
-            }
-        }
+    {               
+        Item item = currentRoom.getObjetos(nombre);       
         if(item.getPuedoCoger() && item != null){
-            int pesoTotal = pesoActual + item.getPesoItem();
-            boolean buscando = true;
-            int contador = 0;            
+            int pesoTotal = pesoActual + item.getPesoItem();                      
             if(pesoTotal <= PESO_MAX){
                 mochila.add(item);
                 pesoActual += item.getPesoItem();
-                itemsRoom.remove(item);
+                currentRoom.removeItem(item);
                 System.out.println("Se añadio a la mochila " + nombre);
             }
             else{
