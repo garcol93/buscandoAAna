@@ -177,4 +177,36 @@ public class Player
         }
     }   
 
+    /**
+     * este metodo le permite pincharse la jeringa para ver la posicion de Ana
+     * @param nombre objeto a pincharse
+     * @return true si se puede pinchar y flase si no
+     */
+    public boolean pinchar(String nombre)
+    {
+        boolean aDevolver = false;
+        if(nombre.equals("jeringa")){
+            if(mochila.size() > 0){
+                boolean buscando = true;
+                int contador = 0;
+                Item item = null;
+                while(buscando)
+                {
+                    if(mochila.get(contador).getId().equals(nombre)){                    
+                        buscando = false;
+                        item = mochila.get(contador);
+                        pesoActual -= item.getPesoItem();
+                        mochila.remove(contador);    
+                        aDevolver=true;
+                    }
+                    contador++;
+                }                
+            }
+            else
+            {
+                System.out.println("La mochila esta vacia");
+            }
+        }        
+        return aDevolver;
+    }
 }

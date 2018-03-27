@@ -18,6 +18,7 @@ public class Game
 {
     private Parser parser;
     private Player player;
+    private Room dondeEstaAna;
     /**
      * Crea el juego e inicializa su mapa interno.
      */
@@ -35,7 +36,7 @@ public class Game
         player = new Player();
         player.setCurrentRoom(createRooms()); // comienza el juego afuera
     }
-    
+
     /**
      * Crea todas las salas y vincula sus salidas juntas.
      */
@@ -58,7 +59,8 @@ public class Game
 
         //colocacion de Ana de manera aleatoria
         Random random = new Random();
-        numeroRoom[random.nextInt(numeroRoom.length)].setEstaAna(true);
+        dondeEstaAna =  numeroRoom[random.nextInt(numeroRoom.length)];
+        dondeEstaAna.setEstaAna(true);
 
         // puertas de salida de las Room
         inicio.setExit("norte",bosque);
@@ -94,7 +96,7 @@ public class Game
         laberinto.addItem(new Item("rata","una rata muerta ", true, 200));
         mordor.addItem(new Item("cubo","un cubo hasta arriba de meadas ", false, 200));
 
-         return inicio; // comienza el juego afuera
+        return inicio; // comienza el juego afuera
     }
 
     /**
@@ -124,7 +126,7 @@ public class Game
         System.out.println("Escriba 'ayuda' si necesita algo.");
         System.out.println();
         player.look();
-        
+
     }
 
     /**
@@ -163,12 +165,21 @@ public class Game
         else if(commandWord.equals("coger")){
             player.take(command.getSecondWord());
         }
-         else if(commandWord.equals("mochila")){
+        else if(commandWord.equals("mochila")){
             player.itemsMochila(); 
         }
         else if(commandWord.equals("dejar")){
             player.drop(command.getSecondWord());
         }
+        else if(commandWord.equals("pinchar")){
+            if(player.pinchar(command.getSecondWord())==true){
+                System.out.println("Te has pinchado la jeringa todo te da vueltas estas teniendo una vision de donde esta Ana");
+                System.out.println("Ana esta " + dondeEstaAna.getDescription());
+            }
+            else {
+                System.out.println("Lo siento no puedes pincharte " + command.getSecondWord());
+            }
+        }        
         return wantToQuit;
     }
 
