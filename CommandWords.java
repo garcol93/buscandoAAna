@@ -1,4 +1,4 @@
-
+import java.util.HashMap;
 /**
  * Esta clase es parte de la aplicaci√≥n "Buscando a Ana".
  * "Buscando a Ana" es un juego de aventura basado en texto muy simple.
@@ -10,18 +10,40 @@
  * @version (18.03.07)
  */
 public class CommandWords
-{
-    // una matriz constante que contiene todas las palabras de comando v√°lidas
-    private static final String[] validCommands = {
-            "ir", "salir", "ayuda", "mirar", "comer", "volver", "coger", "mochila", "dejar","pinchar"
-        };
-
+{   
+    private HashMap<String, CommandWord> validCommands;
     /**
      * Constructor - inicializa las palabras de comando.
      */
     public CommandWords()
     {
-        // nada que hacer en este momento ...
+        validCommands = new HashMap<>();
+        validCommands.put("ir", CommandWord.IR);
+        validCommands.put("ayuda", CommandWord.AYUDA);
+        validCommands.put("salir", CommandWord.SALIR);
+        validCommands.put("mirar", CommandWord.MIRAR);
+        validCommands.put("comer", CommandWord.COMER);
+        validCommands.put("volver", CommandWord.VOLVER);
+        validCommands.put("coger", CommandWord.COGER);
+        validCommands.put("mochila", CommandWord.MOCHILA);
+        validCommands.put("dejar", CommandWord.DEJAR);
+        validCommands.put("pinchar", CommandWord.PINCHAR);
+    }
+
+    /**
+    †  Devuelve la CommandWord asociada con una palabra.
+    †  @param commandWord La palabra para buscar (como una cadena).
+    †  @return The CommandWord correspondiente a la palabra de comando String, o UNKNOWN
+    †  si no es una palabra de comando v·lida.
+    †  */
+    public CommandWord getCommandWord(String commandWord)
+    {
+        CommandWord aDevolver = CommandWord.UNKNOWN;
+        if(isCommand(commandWord))
+        {
+            aDevolver = validCommands.get(commandWord);
+        }
+        return aDevolver;
     }
 
     /**
@@ -31,12 +53,7 @@ public class CommandWords
      */
     public boolean isCommand(String aString)
     {
-        for(int i = 0; i < validCommands.length; i++) {
-            if(validCommands[i].equals(aString))
-                return true;
-        }
-        // si llegamos aqu√≠, la cadena no se encontr√≥ en los comandos
-        return false;
+        return validCommands.keySet().contains(aString);
     }
 
     /**
@@ -44,7 +61,7 @@ public class CommandWords
      */
     public String getCommandList()
     {   String aDevolver = "";
-        for (String command : validCommands) {
+        for (String command : validCommands.keySet()) {
             aDevolver += command + " ";
         }
         return aDevolver;

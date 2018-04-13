@@ -137,41 +137,49 @@ public class Game
     private boolean processCommand(Command command) 
     {
         boolean wantToQuit = false;
-
-        if(command.isUnknown()) {
+        CommandWord commandWord = command.getCommandWord();
+        switch (commandWord){
+            case UNKNOWN:
             System.out.println("No se a que te refieres ...");
-            return false;
-        }
+            break;
 
-        String commandWord = command.getCommandWord();
-        if (commandWord.equals("ayuda")) {
+            case AYUDA:
             printHelp();
-        }
-        else if (commandWord.equals("ir")) {
+            break;
+
+            case IR:
             player.goRoom(command);
-        }
-        else if (commandWord.equals("salir")) {
+            break;
+
+            case SALIR:
             wantToQuit = quit(command);
-        }
-        else if (commandWord.equals("mirar")) {
+            break;
+
+            case MIRAR:
             player.look();
-        }
-        else if(commandWord.equals("comer")) {
+            break;
+
+            case COMER:
             player.eat();
-        }
-        else if(commandWord.equals("volver")){
+            break;
+
+            case VOLVER:
             player.back();
-        }
-        else if(commandWord.equals("coger")){
+            break;
+
+            case COGER:
             player.take(command.getSecondWord());
-        }
-        else if(commandWord.equals("mochila")){
+            break;
+
+            case MOCHILA:
             player.itemsMochila(); 
-        }
-        else if(commandWord.equals("dejar")){
+            break;
+
+            case DEJAR:
             player.drop(command.getSecondWord());
-        }
-        else if(commandWord.equals("pinchar")){
+            break;
+
+            case PINCHAR:
             if(player.pinchar(command.getSecondWord())==true){
                 System.out.println("Te has pinchado la jeringa todo te da vueltas estas teniendo una vision de donde esta Ana");
                 System.out.println("Ana esta " + dondeEstaAna.getDescription());
@@ -179,7 +187,8 @@ public class Game
             else {
                 System.out.println("Lo siento no puedes pincharte " + command.getSecondWord());
             }
-        }        
+            break;
+        }            
         return wantToQuit;
     }
 
