@@ -47,10 +47,10 @@ public class Parser
         // Ahora comprueba si esta palabra es conocida. Si es así, crea un comando
         // con eso. Si no, crea un comando "null" (para comando desconocido).
         if(commands.isCommand(word1)) {
-            return new Command(word1, word2);
+            return new Command(commands.getCommandWord(word1), word2);
         }
         else {
-            return new Command(null, word2); 
+            return new Command(CommandWord.UNKNOWN, word2); 
         }
     }
 
